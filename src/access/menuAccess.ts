@@ -1,8 +1,8 @@
+import { menus } from "../../config/menu";
 import checkAccess from "@/access/checkAccess";
-import { menus } from "../../config/menus";
 
 /**
- * 获取有权限、可访问的菜单
+ * 获取有权限、可访问的菜单（递归）
  * @param loginUser
  * @param menuItems
  */
