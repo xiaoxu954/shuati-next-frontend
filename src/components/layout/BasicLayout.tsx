@@ -1,6 +1,6 @@
 "use client";
 import { PageContainer, ProCard, ProLayout } from "@ant-design/pro-components";
-import { Button, Dropdown } from "antd";
+import { Dropdown } from "antd";
 import React from "react";
 import Link from "next/link";
 import GlobalFooter from "@/components/Footer/GlobalFooter";
@@ -91,22 +91,16 @@ export default function BasicLayout({ children }: Props) {
         onMenuHeaderClick={(e) => console.log(e)}
         // 菜单渲染
         menuItemRender={(item, dom) => (
-            <Link href={item.path || "/"} target={item.target}>{dom}</Link>
+          <Link href={item.path || "/"} target={item.target}>
+            {dom}
+          </Link>
         )}
-
         footerRender={() => <GlobalFooter />}
       >
         <PageContainer
           breadcrumb={{
             routes: [],
           }}
-          extra={[
-            <Button key="3">操作</Button>,
-            <Button key="2">操作</Button>,
-            <Button key="1" type="primary">
-              主操作
-            </Button>,
-          ]}
         >
           <ProCard
             style={{

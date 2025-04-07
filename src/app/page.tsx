@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 export default function Home() {
   return (
     <main className={styles.main}>
-      <Image src={`/assets/logo.jpg`} alt={"面试"}  width="64" height="64" />
+      <Image src={`/assets/logo.jpg`} alt={"面试"} width="64" height="64" />
 
       <div className={styles.description}>
         <p>
