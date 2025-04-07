@@ -1,11 +1,11 @@
-import {useSelector} from "react-redux";
-import {RootState} from "@/stores";
-import {usePathname} from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/stores";
+import { usePathname } from "next/navigation";
 import checkAccess from "@/access/checkAccess";
 import Forbidden from "@/app/forbidden";
 import React from "react";
 import AccessEnum from "@/access/accessEnum";
-import {findAllMenuItemByPath} from "../../../config/menus";
+import { findAllMenuItemByPath } from "../../../config/menus";
 
 /**
  * 统一权限校验拦截器

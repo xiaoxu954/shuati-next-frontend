@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/stores";
 import { Dropdown } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
-import {menus} from "../../../config/menus";
+import { menus } from "../../../config/menus";
 
 interface Props {
   children: React.ReactNode;
