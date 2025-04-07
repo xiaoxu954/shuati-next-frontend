@@ -19,7 +19,6 @@ export default function BasicLayout({ children }: Props) {
   const pathname = usePathname();
 
   const loginUser = useSelector((state: RootState) => state.loginUser);
-
   return (
     <div
       id="test-pro-layout"
