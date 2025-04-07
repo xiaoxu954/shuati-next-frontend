@@ -1,13 +1,15 @@
 "use client";
 import { PageContainer, ProCard, ProLayout } from "@ant-design/pro-components";
-import { Dropdown } from "antd";
 import React from "react";
 import Link from "next/link";
 import GlobalFooter from "@/components/Footer/GlobalFooter";
 import Image from "next/image";
-import { LogoutOutlined } from "@ant-design/icons";
-import menus from "../../../config/menus";
 import { usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/stores";
+import { Dropdown } from "antd";
+import { LogoutOutlined } from "@ant-design/icons";
+import {menus} from "../../../config/menus";
 
 interface Props {
   children: React.ReactNode;
@@ -15,6 +17,9 @@ interface Props {
 
 export default function BasicLayout({ children }: Props) {
   const pathname = usePathname();
+
+  const loginUser = useSelector((state: RootState) => state.loginUser);
+
   return (
     <div
       id="test-pro-layout"
@@ -53,9 +58,9 @@ export default function BasicLayout({ children }: Props) {
           type: "group",
         }}
         avatarProps={{
-          src: "/assets/logo.png",
+          src: loginUser.userAvatar || "/assets/logo.png",
           size: "small",
-          title: "xxx",
+          title: loginUser.userName || "鱼皮鸭",
           render: (props, dom) => {
             return (
               <Dropdown
@@ -102,6 +107,7 @@ export default function BasicLayout({ children }: Props) {
             routes: [],
           }}
         >
+          {JSON.stringify(loginUser)}
           <ProCard
             style={{
               height: "200vh",
