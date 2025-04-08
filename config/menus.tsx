@@ -17,6 +17,10 @@ export const menus = [
     name: "题目",
   },
   {
+    path: "/user/login",
+    name: "用户登录",
+  },
+  {
     name: "面试鸭",
     path: "https://mianshiya.com",
     target: "_blank",

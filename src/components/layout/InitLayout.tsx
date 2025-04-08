@@ -25,10 +25,10 @@ const InitLayout: React.FC<
       dispatch(setLoginUser(res.data.data!));
     } else {
       // todo 测试代码，实际可删除
-      setTimeout(() => {
-        const testUser = { userName: "测试登录", id: 1 };
-        dispatch(setLoginUser(testUser));
-      }, 3000);
+      // setTimeout(() => {
+      //   const testUser = { userName: "测试登录", id: 1 };
+      //   dispatch(setLoginUser(testUser));
+      // }, 3000);
     }
   }, []);
 

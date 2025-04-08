@@ -4,12 +4,14 @@ import React from "react";
 import Link from "next/link";
 import GlobalFooter from "@/components/Footer/GlobalFooter";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useSelector } from "react-redux";
+import { usePathname, useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/stores";
-import { Dropdown } from "antd";
+import { Dropdown, message } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
 import { menus } from "../../../config/menus";
+import { userLogoutUsingPost } from "@/api/userController";
+import { DEFAULT_USER, setLoginUser } from "@/stores/loginUser";
 
 interface Props {
   children: React.ReactNode;
@@ -19,9 +21,27 @@ export default function BasicLayout({ children }: Props) {
   const pathname = usePathname();
 
   const loginUser = useSelector((state: RootState) => state.loginUser);
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  /**
+   * 用户注销
+   */
+  const userLogout = async () => {
+    try {
+      await userLogoutUsingPost();
+      message.success("已退出登录");
+      dispatch(setLoginUser(DEFAULT_USER));
+      router.push("/user/login");
+    } catch (e) {
+      message.error("操作失败，" + (e as Error).message);
+    }
+    return;
+  };
+
   return (
     <div
-      id="test-pro-layout"
+      id="BasicLayout"
       style={{
         height: "100vh",
       }}
@@ -61,7 +81,7 @@ export default function BasicLayout({ children }: Props) {
           size: "small",
           title: loginUser.userName || "鱼皮鸭",
           render: (props, dom) => {
-            return (
+            return loginUser.id ? (
               <Dropdown
                 menu={{
                   items: [
@@ -71,10 +91,18 @@ export default function BasicLayout({ children }: Props) {
                       label: "退出登录",
                     },
                   ],
+                  onClick: async (event: { key: React.Key }) => {
+                    const { key } = event;
+                    if (key === "logout") {
+                      userLogout();
+                    }
+                  },
                 }}
               >
                 {dom}
               </Dropdown>
+            ) : (
+              <div onClick={() => router.push("/user/login")}>{dom}</div>
             );
           },
         }}
@@ -106,13 +134,14 @@ export default function BasicLayout({ children }: Props) {
             routes: [],
           }}
         >
-          {JSON.stringify(loginUser)}
           <ProCard
             style={{
               height: "200vh",
               minHeight: 800,
             }}
           >
+            {JSON.stringify(loginUser)}
+            {children}
             <div />
           </ProCard>
         </PageContainer>
