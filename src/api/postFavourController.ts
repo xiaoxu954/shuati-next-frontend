@@ -2,7 +2,7 @@
 /* eslint-disable */
 import request from "@/libs/request";
 
-/** doPostFavour POST /api/post_favour/ */
+/** 帖子收藏 / 取消收藏 POST /api/post_favour/ */
 export async function doPostFavourUsingPost(
   body: API.PostFavourAddRequest,
   options?: { [key: string]: any },

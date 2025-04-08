@@ -2,7 +2,7 @@
 /* eslint-disable */
 import request from "@/libs/request";
 
-/** doThumb POST /api/post_thumb/ */
+/** 点赞 / 取消点赞 POST /api/post_thumb/ */
 export async function doThumbUsingPost(
   body: API.PostThumbAddRequest,
   options?: { [key: string]: any },
