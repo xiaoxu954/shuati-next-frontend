@@ -9,7 +9,6 @@ export const DEFAULT_USER: API.LoginUserVO = {
   userRole: AccessEnum.NOT_LOGIN,
 };
 
-
 /**
  * 登录用户全局状态
  */

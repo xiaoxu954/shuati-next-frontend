@@ -45,7 +45,9 @@ const UserLoginPage: React.FC = (props) => {
     <div id="userLoginPage">
       <LoginForm<API.UserAddRequest>
         form={form}
-        logo={<Image src="/assets/logo.jpg" alt="logo" width={44} height={44} />}
+        logo={
+          <Image src="/assets/logo.jpg" alt="logo" width={44} height={44} />
+        }
         title="刷题平台 - 用户登录"
         subTitle="刷题网站"
         onFinish={doSubmit}

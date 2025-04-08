@@ -77,9 +77,9 @@ export default function BasicLayout({ children }: Props) {
           type: "group",
         }}
         avatarProps={{
-          src: loginUser.userAvatar || "/assets/logo.png",
+          src: loginUser.userAvatar || "/assets/logo.jpg",
           size: "small",
-          title: loginUser.userName || "鱼皮鸭",
+          title: loginUser.userName || "测试号",
           render: (props, dom) => {
             return loginUser.id ? (
               <Dropdown
@@ -140,7 +140,6 @@ export default function BasicLayout({ children }: Props) {
               minHeight: 800,
             }}
           >
-            {JSON.stringify(loginUser)}
             {children}
             <div />
           </ProCard>
