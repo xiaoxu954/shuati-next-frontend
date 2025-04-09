@@ -2,7 +2,6 @@
 import { PageContainer, ProCard, ProLayout } from "@ant-design/pro-components";
 import React from "react";
 import Link from "next/link";
-import GlobalFooter from "@/components/Footer/GlobalFooter";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";

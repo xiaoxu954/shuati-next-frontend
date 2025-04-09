@@ -29,11 +29,11 @@ const UserLoginPage: React.FC = (props) => {
   const doSubmit = async (values: any) => {
     try {
       const res = await userLoginUsingPost(values);
-      if (res.data.data) {
+      if (res.data) {
         message.success("登录成功！");
         // 保存用户登录态
-        dispatch(setLoginUser(res.data.data));
-        router.replace("/");
+        dispatch(setLoginUser(res.data));
+        router.push("/");
         form.resetFields();
       }
     } catch (e) {
