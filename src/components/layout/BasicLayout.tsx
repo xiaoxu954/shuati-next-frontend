@@ -127,19 +127,15 @@ export default function BasicLayout({ children }: Props) {
             {dom}
           </Link>
         )}
-        footerRender={() => <GlobalFooter />}
+        //底部
+        // footerRender={() => <GlobalFooter />}
       >
         <PageContainer
           breadcrumb={{
             routes: [],
           }}
         >
-          <ProCard
-            style={{
-              height: "200vh",
-              minHeight: 800,
-            }}
-          >
+          <ProCard>
             {children}
             <div />
           </ProCard>

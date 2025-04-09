@@ -1,24 +1,24 @@
 "use client";
 import { ProColumns, ProTable } from "@ant-design/pro-components";
 import { message, Modal } from "antd";
-import { updateUserUsingPost } from "@/api/userController";
 import React from "react";
+import { updateQuestionBankUsingPost } from "@/api/questionBankController";
 
 interface Props {
-  oldData?: API.User;
+  oldData?: API.QuestionBank;
   visible: boolean;
-  columns: ProColumns<API.User>[];
-  onSubmit: (values: API.UserUpdateRequest) => void;
+  columns: ProColumns<API.QuestionBank>[];
+  onSubmit: (values: API.QuestionBankUpdateRequest) => void;
   onCancel: () => void;
 }
 
 const UpdateModal = (props: Props) => {
   const { oldData, visible, columns, onSubmit, onCancel } = props;
 
-  const handleUpdate = async (values: API.UserUpdateRequest) => {
+  const handleUpdate = async (values: API.QuestionBankUpdateRequest) => {
     const hide = message.loading("正在更新");
     try {
-      await updateUserUsingPost(values);
+      await updateQuestionBankUsingPost(values);
       hide();
       message.success("更新成功");
       return true;
@@ -44,7 +44,7 @@ const UpdateModal = (props: Props) => {
         form={{
           initialValues: oldData,
         }}
-        onSubmit={async (values: API.UserUpdateRequest) => {
+        onSubmit={async (values: API.QuestionBankUpdateRequest) => {
           if (!oldData?.id || !onSubmit) {
             return;
           }

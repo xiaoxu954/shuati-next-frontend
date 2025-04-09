@@ -3,17 +3,17 @@ import { PlusOutlined } from "@ant-design/icons";
 import type { ActionType, ProColumns } from "@ant-design/pro-components";
 import { ProTable } from "@ant-design/pro-components";
 import { Button, message, Popconfirm, PopconfirmProps, Space } from "antd";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
+import CreateModal from "@/app/admin/bank/components/CreateModal";
+import UpdateModal from "@/app/admin/bank/components/UpdateModal";
 import {
-  deleteUserUsingPost,
-  listUserByPageUsingPost,
-} from "@/api/userController";
-import CreateModal from "@/app/admin/user/components/CreateModal";
-import UpdateModal from "@/app/admin/user/components/UpdateModal";
+  deleteQuestionBankUsingPost,
+  listQuestionBankByPageUsingPost,
+} from "@/api/questionBankController";
 
-const UserManagePage: React.FC = () => {
+const QuestionBankManagePage: React.FC = () => {
   // 当前用户点击的数据
-  const [currentRow, setCurrentRow] = useState<API.User>();
+  const [currentRow, setCurrentRow] = useState<API.QuestionBank>();
 
   // 是否显示新建窗口
   const [createModalVisible, setCreateModalVisible] = useState<boolean>(false);
@@ -22,11 +22,11 @@ const UserManagePage: React.FC = () => {
   const actionRef = useRef<ActionType>();
 
   //确认删除提示
-  const handleDelete = async (row: API.User) => {
+  const handleDelete = async (row: API.QuestionBank) => {
     const hide = message.loading("正在删除");
     if (!row) return true;
     try {
-      await deleteUserUsingPost({
+      await deleteQuestionBankUsingPost({
         id: row.id as any,
       });
       hide();
@@ -43,7 +43,8 @@ const UserManagePage: React.FC = () => {
   const delCancel: PopconfirmProps["onCancel"] = (e) => {
     console.log(e);
   };
-  const columns: ProColumns<API.User>[] = [
+
+  const columns: ProColumns<API.QuestionBank>[] = [
     {
       title: "id",
       dataIndex: "id",
@@ -51,18 +52,18 @@ const UserManagePage: React.FC = () => {
       hideInForm: true,
     },
     {
-      title: "账号",
-      dataIndex: "userAccount",
+      title: "标题",
+      dataIndex: "title",
       valueType: "text",
     },
     {
-      title: "用户名",
-      dataIndex: "userName",
+      title: "描述",
+      dataIndex: "description",
       valueType: "text",
     },
     {
-      title: "头像",
-      dataIndex: "userAvatar",
+      title: "图片",
+      dataIndex: "picture",
       valueType: "image",
       fieldProps: {
         width: 64,
@@ -70,26 +71,17 @@ const UserManagePage: React.FC = () => {
       hideInSearch: true,
     },
     {
-      title: "简介",
-      dataIndex: "userProfile",
-      valueType: "textarea",
-    },
-    {
-      title: "权限",
-      dataIndex: "userRole",
-      valueEnum: {
-        user: {
-          text: "用户",
-        },
-        admin: {
-          text: "管理员",
-        },
-      },
-    },
-    {
       title: "创建时间",
       sorter: true,
       dataIndex: "createTime",
+      valueType: "dateTime",
+      hideInSearch: true,
+      hideInForm: true,
+    },
+    {
+      title: "编辑时间",
+      sorter: true,
+      dataIndex: "editTime",
       valueType: "dateTime",
       hideInSearch: true,
       hideInForm: true,
@@ -119,7 +111,7 @@ const UserManagePage: React.FC = () => {
           <Popconfirm
             key="deleteable"
             title="删除提示"
-            description={"确定删除 " + record.userName + " ?"}
+            description={"确定删除 " + record.title + " ?"}
             onConfirm={() => handleDelete(record)}
             onCancel={delCancel}
             okText="确定"
@@ -136,7 +128,7 @@ const UserManagePage: React.FC = () => {
 
   return (
     <div>
-      <ProTable<API.User>
+      <ProTable<API.QuestionBank>
         headerTitle={"查询表格"}
         actionRef={actionRef}
         toolBarRender={() => [
@@ -154,12 +146,13 @@ const UserManagePage: React.FC = () => {
           const sortField = Object.keys(sort)?.[0];
           const sortOrder = sort?.[sortField];
 
-          const res: API.BaseResponsePageUser_ = await listUserByPageUsingPost({
-            ...params,
-            sortField,
-            sortOrder,
-            ...filter,
-          } as API.UserQueryRequest);
+          const res: API.BaseResponsePageQuestionBank_ =
+            await listQuestionBankByPageUsingPost({
+              ...params,
+              sortField,
+              sortOrder,
+              ...filter,
+            } as API.QuestionBankQueryRequest);
 
           return {
             success: res.code === 0,
@@ -195,4 +188,4 @@ const UserManagePage: React.FC = () => {
     </div>
   );
 };
-export default UserManagePage;
+export default QuestionBankManagePage;
