@@ -7,10 +7,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/stores";
 import { Dropdown, message } from "antd";
-import { LogoutOutlined } from "@ant-design/icons";
+import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { menus } from "../../../config/menus";
 import { userLogoutUsingPost } from "@/api/userController";
-import { DEFAULT_USER, setLoginUser } from "@/stores/loginUser";
+import { setLoginUser } from "@/stores/loginUser";
+import SearchInput from "@/layouts/BasicLayout/components/SearchInput";
+import { DEFAULT_USER } from "@/constants/user";
 
 interface Props {
   children: React.ReactNode;
@@ -75,6 +77,15 @@ export default function BasicLayout({ children }: Props) {
         menu={{
           type: "group",
         }}
+        //搜索框
+        actionsRender={(props) => {
+          if (props.isMobile) return [];
+          return [
+            <div key="SearchOutlined">
+              <SearchInput />
+            </div>,
+          ];
+        }}
         avatarProps={{
           src: loginUser.userAvatar || "/assets/logo.jpg",
           size: "small",
@@ -84,6 +95,11 @@ export default function BasicLayout({ children }: Props) {
               <Dropdown
                 menu={{
                   items: [
+                    {
+                      key: "userCenter",
+                      icon: <UserOutlined />,
+                      label: "个人中心",
+                    },
                     {
                       key: "logout",
                       icon: <LogoutOutlined />,
@@ -122,7 +138,7 @@ export default function BasicLayout({ children }: Props) {
         onMenuHeaderClick={(e) => console.log(e)}
         // 菜单渲染
         menuItemRender={(item, dom) => (
-          <Link href={item.path || "/"} target={item.target}>
+          <Link href={item.path || "/public"} target={item.target}>
             {dom}
           </Link>
         )}

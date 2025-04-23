@@ -16,12 +16,11 @@ export const menus = [
     path: "/questions",
     name: "题目",
   },
-
   {
-    name: "面试鸭",
-    path: "https://mianshiya.com",
-    target: "_blank",
+    path: "/mockInterview/add",
+    name: "AI 模拟面试",
   },
+
   {
     path: "/admin",
     name: "管理",
@@ -31,28 +30,28 @@ export const menus = [
       {
         path: "/admin/user",
         name: "用户管理",
-        // access: ACCESS_ENUM.ADMIN,
+        access: ACCESS_ENUM.ADMIN,
       },
       {
         path: "/admin/bank",
         name: "题库管理",
-        // access: ACCESS_ENUM.ADMIN,
+        access: ACCESS_ENUM.ADMIN,
       },
       {
         path: "/admin/question",
         name: "题目管理",
-        // access: ACCESS_ENUM.ADMIN,
+        access: ACCESS_ENUM.ADMIN,
       },
     ],
   },
 ] as MenuDataItem[];
 
-// 根据路径查找所有菜单
+// 根据全部路径查找菜单
 export const findAllMenuItemByPath = (path: string): MenuDataItem | null => {
   return findMenuItemByPath(menus, path);
 };
 
-// 根据路径查找菜单
+// 根据路径查找菜单（递归）
 export const findMenuItemByPath = (
   menus: MenuDataItem[],
   path: string,

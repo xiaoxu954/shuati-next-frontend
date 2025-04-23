@@ -14,6 +14,11 @@ interface Props {
 
 const UpdateModal = (props: Props) => {
   const { oldData, visible, columns, onSubmit, onCancel } = props;
+  // 表单转换
+  let initValues = { ...oldData };
+  if (oldData?.tags) {
+    initValues.tags = JSON.parse(oldData.tags) || [];
+  }
 
   const handleUpdate = async (values: API.UserUpdateRequest) => {
     const hide = message.loading("正在更新");
@@ -42,7 +47,7 @@ const UpdateModal = (props: Props) => {
         type="form"
         columns={columns}
         form={{
-          initialValues: oldData,
+          initialValues: initValues,
         }}
         onSubmit={async (values: API.UserUpdateRequest) => {
           if (!oldData?.id || !onSubmit) {

@@ -154,13 +154,12 @@ const UserManagePage: React.FC = () => {
           const sortField = Object.keys(sort)?.[0];
           const sortOrder = sort?.[sortField];
 
-          const res: API.BaseResponsePageUser_ = await listUserByPageUsingPost({
+          const res = await listUserByPageUsingPost({
             ...params,
             sortField,
             sortOrder,
             ...filter,
           } as API.UserQueryRequest);
-
           return {
             success: res.code === 0,
             data: res.data?.records || [],

@@ -10,8 +10,8 @@ import {
   deleteQuestionUsingPost,
   listQuestionByPageUsingPost,
 } from "@/api/questionController";
-import TagList from "@/app/admin/question/components/TagList";
-import MdEditor from "@/components/MdEditor/MdEditor";
+import TagList from "@/components/TagList";
+import MdEditor from "@/components/MdEditor";
 
 const QuestionManagePage: React.FC = () => {
   // 是否显示新建窗口
