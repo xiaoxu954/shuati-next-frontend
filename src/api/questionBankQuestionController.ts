@@ -17,6 +17,24 @@ export async function addQuestionBankQuestionUsingPost(
   });
 }
 
+/** batchDeleteQuestions POST /api/questionBankQuestion/delete/batch */
+export async function batchDeleteQuestionsUsingPost(
+  body: API.QuestionBatchDeleteRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseBoolean_>(
+    "/api/questionBankQuestion/delete/batch",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: body,
+      ...(options || {}),
+    },
+  );
+}
+
 /** 删除题库题目关系 POST /api/questionBankQuestion/remove */
 export async function removeQuestionBankQuestionUsingPost(
   body: API.QuestionBankQuestionRemoveRequest,
@@ -30,4 +48,22 @@ export async function removeQuestionBankQuestionUsingPost(
     data: body,
     ...(options || {}),
   });
+}
+
+/** batchRemoveQuestionsFromBank POST /api/questionBankQuestion/remove/batch */
+export async function batchRemoveQuestionsFromBankUsingPost(
+  body: API.QuestionBankQuestionBatchRemoveRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseBoolean_>(
+    "/api/questionBankQuestion/remove/batch",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: body,
+      ...(options || {}),
+    },
+  );
 }

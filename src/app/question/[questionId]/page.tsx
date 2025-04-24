@@ -1,44 +1,31 @@
-"use server";
-import Title from "antd/es/typography/Title";
-import { message } from "antd";
-import { searchQuestionVoByPageUsingPost } from "@/api/questionController";
-import QuestionTable from "@/components/QuestionTable";
+import React from "react";
+import { getQuestionVoByIdUsingGet } from "@/api/questionController";
+import QuestionCard from "@/components/QuestionCard";
 import "./index.css";
 
 /**
- * 题目列表页面
+ * 题目详情页面
  * @constructor
  */
-export default async function QuestionsPage({ searchParams }) {
-  // 获取 url 的查询参数
-  const { q: searchText } = searchParams;
-  // 题目列表和总数
-  let questionList = [];
-  let total = 0;
+export default async function QuestionPage({ params }: any) {
+  const { questionId } = params;
 
+  let question = undefined;
   try {
-    const res = await searchQuestionVoByPageUsingPost({
-      searchText,
-      pageSize: 12,
-      sortField: "createTime",
-      sortOrder: "descend",
+    const questionRes = await getQuestionVoByIdUsingGet({
+      id: questionId,
     });
-    questionList = res.data.records ?? [];
-    total = res.data.total ?? 0;
+    question = questionRes.data;
   } catch (e) {
-    message.error("获取题目列表失败，" + (e as Error).message);
+    console.error("获取题目详情失败，" + (e as Error).message);
+  }
+  if (!question) {
+    return <div>获取题目详情失败，请刷新重试</div>;
   }
 
   return (
-    <div id="questionsPage" className="max-width-content">
-      <Title level={3}>题目大全</Title>
-      <QuestionTable
-        defaultQuestionList={questionList}
-        defaultTotal={total}
-        defaultSearchParams={{
-          title: searchText,
-        }}
-      />
+    <div id="questionPage" className="max-width-content">
+      <QuestionCard question={question} />
     </div>
   );
 }

@@ -2,7 +2,14 @@
 import { PlusOutlined } from "@ant-design/icons";
 import type { ActionType, ProColumns } from "@ant-design/pro-components";
 import { ProTable } from "@ant-design/pro-components";
-import { Button, message, Popconfirm, PopconfirmProps, Space } from "antd";
+import {
+  Button,
+  message,
+  Popconfirm,
+  PopconfirmProps,
+  Space,
+  Table,
+} from "antd";
 import React, { useRef, useState } from "react";
 import CreateModal from "@/app/admin/question/components/CreateModal";
 import UpdateModal from "@/app/admin/question/components/UpdateModal";
@@ -163,7 +170,64 @@ const QuestionManagePage: React.FC = () => {
     <div>
       <ProTable<API.Question>
         headerTitle={"查询表格"}
+        rowKey="id"
+        rowSelection={{
+          // 自定义选择项参考: https://ant.design/components/table-cn/#components-table-demo-row-selection-custom
+          // 注释该行则默认不显示下拉选项
+          selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
+        }}
         actionRef={actionRef}
+        tableAlertRender={({
+          selectedRowKeys,
+          selectedRows,
+          onCleanSelected,
+        }) => {
+          return (
+            <Space size={24}>
+              <span>
+                已选 {selectedRowKeys.length} 项
+                <a style={{ marginInlineStart: 8 }} onClick={onCleanSelected}>
+                  取消选择
+                </a>
+              </span>
+            </Space>
+          );
+        }}
+        tableAlertOptionRender={({
+          selectedRowKeys,
+          selectedRows,
+          onCleanSelected,
+        }) => {
+          return (
+            <Space size={16}>
+              <Button
+                onClick={() => {
+                  // 打开弹窗
+                }}
+              >
+                批量向题库添加题目
+              </Button>
+              <Button
+                onClick={() => {
+                  // 打开弹窗
+                }}
+              >
+                批量从题库移除题目
+              </Button>
+              <Popconfirm
+                title="确认删除"
+                description="你确定要删除这些题目么？"
+                onConfirm={() => {
+                  // 批量删除题目
+                }}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button danger>批量删除题目</Button>
+              </Popconfirm>
+            </Space>
+          );
+        }}
         toolBarRender={() => [
           <Button
             type="primary"

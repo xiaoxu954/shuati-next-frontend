@@ -17,12 +17,13 @@ export default async function BankPage({ params }) {
   let bank = undefined;
 
   try {
-    const res:BaseResponseQuestionBankVO_ = await getQuestionBankVoByIdUsingGet({
-      id: questionBankId,
-      needQueryQuestionList: true,
-      // 可以自行扩展为分页实现
-      pageSize: 200,
-    });
+    const res: BaseResponseQuestionBankVO_ =
+      await getQuestionBankVoByIdUsingGet({
+        id: questionBankId,
+        needQueryQuestionList: true,
+        // 可以自行扩展为分页实现
+        pageSize: 200,
+      });
     bank = res.data;
   } catch (e) {
     console.error("获取题库详情失败，" + (e as Error).message);

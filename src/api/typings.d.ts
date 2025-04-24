@@ -410,6 +410,16 @@ declare namespace API {
     questionId?: number;
   };
 
+  type QuestionBankQuestionBatchAddRequest = {
+    questionBankId?: number;
+    questionIdList?: number[];
+  };
+
+  type QuestionBankQuestionBatchRemoveRequest = {
+    questionBankId?: number;
+    questionIdList?: number[];
+  };
+
   type QuestionBankQuestionRemoveRequest = {
     questionBankId?: number;
     questionId?: number;
@@ -434,6 +444,10 @@ declare namespace API {
     userId?: number;
   };
 
+  type QuestionBatchDeleteRequest = {
+    questionIdList?: number[];
+  };
+
   type QuestionQueryRequest = {
     answer?: string;
     content?: string;
@@ -441,6 +455,7 @@ declare namespace API {
     id?: number;
     pageSize?: number;
     questionBankId?: number;
+    searchText?: string;
     sortField?: string;
     sortOrder?: string;
     tags?: string[];

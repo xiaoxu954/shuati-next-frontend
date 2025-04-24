@@ -54,13 +54,13 @@ const QuestionTable: React.FC = (props: Props) => {
     },
     {
       title: "标签",
-      dataIndex: "tagList",
+      dataIndex: "tags",
       valueType: "select",
       fieldProps: {
         mode: "tags",
       },
       render: (_, record) => {
-        return <TagList tagList={record.tagList} />;
+        return <TagList tagList={record.tags} />;
       },
     },
   ];
@@ -91,7 +91,11 @@ const QuestionTable: React.FC = (props: Props) => {
             setInit(false);
             // 如果已有外层传来的默认数据，无需再次查询
             if (defaultQuestionList && defaultTotal) {
-              return;
+              return {
+                success: true,
+                data: defaultQuestionList,
+                total: defaultTotal,
+              };
             }
           }
 

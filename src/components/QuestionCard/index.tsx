@@ -26,7 +26,7 @@ const QuestionCard = (props: Props) => {
         <Title level={1} style={{ fontSize: 24 }}>
           {question.title}
         </Title>
-        <TagList tagList={question.tagList} />
+        <TagList tagList={question.tags} />
         <div style={{ marginBottom: 16 }} />
         <MdViewer value={question.content} />
       </Card>

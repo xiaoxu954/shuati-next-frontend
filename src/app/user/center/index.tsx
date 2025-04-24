@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/stores";
 import { useState } from "react";
 import "./index.css";
+import CalendarChart from "@/app/user/center/components/CalendarChart";
 
 /**
  * 用户中心页面

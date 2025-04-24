@@ -25,6 +25,7 @@ export default async function BankQuestionPage({ params }) {
       // 可以自行扩展为分页实现
       pageSize: 200,
     });
+    console.log(res);
     bank = res.data;
   } catch (e) {
     console.error("获取题库列表失败，" + (e as Error).message);
